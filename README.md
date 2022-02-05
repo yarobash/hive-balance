@@ -1,1 +1,1 @@
-# Hive Balance
+# Hive Balance 🍯🐝⚖️🐝🍯
