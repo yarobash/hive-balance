@@ -7,5 +7,8 @@
 set -o nounset
 set -o errexit
 
+compose_message() {
+}
+
 main() {
 }
