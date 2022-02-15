@@ -4,6 +4,9 @@
 # Collect current system status adn send via telegram bot.
 ######################################################################
 
+set -o nounset
+set -o errexit
+
 check_arguments() {
 }
 
