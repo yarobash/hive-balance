@@ -7,6 +7,12 @@
 set -o nounset
 set -o errexit
 
+check_arguments() {
+}
+
+parse_arguments() {
+}
+
 compose_message() {
 }
 
