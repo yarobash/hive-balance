@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ######################################################################
-# Collect current system status adn send via telegram bot.
+# Collect current system status and send via telegram bot.
 ######################################################################
 
 set -o nounset
