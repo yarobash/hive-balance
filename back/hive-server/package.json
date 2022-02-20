@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy": "scp -r ../hive-server/* root@cloudapiary.ru:/home/cloudapiary/hive-server/"
+    "deploy": "./deploy.sh"
   },
   "repository": {
     "type": "git",
