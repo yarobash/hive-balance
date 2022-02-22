@@ -5,7 +5,8 @@ const { Schema, model } = mongoose;
 interface Apiary {
   title: string;
   owner: string;
-  hives: string[];
+  latitude: number;
+  longitude: number;
 }
 
 const schema = new Schema<Apiary>({
@@ -19,9 +20,11 @@ const schema = new Schema<Apiary>({
     required: true,
   },
 
-  hives: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'hive',
-    default: [],
-  }],
+  latitude: { 
+    type: Number,
+  },
+
+  longitude: {
+    type: Number,
+  },
 });
