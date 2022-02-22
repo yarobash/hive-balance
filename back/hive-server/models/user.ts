@@ -23,10 +23,4 @@ const schema = new Schema<User>({
     type: String,
     required: true,
   },
-
-  apiaries: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'apiary',
-    default: [],
-  }],
 });
