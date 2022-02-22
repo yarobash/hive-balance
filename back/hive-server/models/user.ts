@@ -6,7 +6,6 @@ interface User {
   name: string;
   email: string;
   password: string;
-  apiaries: string[];
 }
 
 const schema = new Schema<User>({
