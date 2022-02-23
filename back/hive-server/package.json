@@ -2,8 +2,11 @@
   "name": "hive-server",
   "version": "0.0.1",
   "description": "The main server of 'hive-balance' project",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
+    "build": "tsc",
+    "prestart": "npm run build",
+    "start": "node .",
     "test": "echo \"Error: no test specified\" && exit 1",
     "deploy": "./deploy.sh"
   },
