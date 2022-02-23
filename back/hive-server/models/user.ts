@@ -8,9 +8,10 @@ interface User {
   password: string;
 }
 
-const schema = new Schema<User>({
+const userSchema = new Schema<User>({
   name: {
     type: String,
+    required: true,
   },
 
   email: {
@@ -21,5 +22,8 @@ const schema = new Schema<User>({
   password: {
     type: String,
     required: true,
+    select: false,
   },
 });
+
+const UserModel = model<User>('User', userSchema);

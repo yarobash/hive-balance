@@ -19,7 +19,9 @@
   "homepage": "https://github.com/yar83/hive-balance#readme",
   "dependencies": {
     "express": "^4.17.3",
-    "mongoose": "^6.2.3",
+    "mongoose": "^6.2.3"
+  },
+  "devDependencies": {
     "typescript": "^4.5.5"
   }
 }
