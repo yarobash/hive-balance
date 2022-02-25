@@ -1,6 +1,4 @@
-import mongoose from 'mongoose';
-
-const { Schema, model } = mongoose;
+import { Schema, Types, model } from 'mongoose';
 
 interface User {
   name: string;
@@ -25,5 +23,3 @@ const userSchema = new Schema<User>({
     select: false,
   },
 });
-
-const UserModel = model<User>('User', userSchema);
