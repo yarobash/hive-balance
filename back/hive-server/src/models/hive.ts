@@ -1,10 +1,8 @@
-import mongoose from 'mongoose';
-
-const { Schema, model } = mongoose;
+import { Schema, Types, model } from 'mongoose';
 
 interface Hive {
   title: string;
-  apiary: string;
+  apiary: Types.ObjectId;
 }
 
 const schema = new Schema<Hive>({
@@ -13,7 +11,7 @@ const schema = new Schema<Hive>({
   },
 
   apiary: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'apiary',
     required: true,
   },
