@@ -1,10 +1,8 @@
-import mongoose from 'mongoose';
-
-const { Schema, model } = mongoose;
+import { Schema, Types, model } from 'mongoose';
 
 interface Apiary {
   title: string;
-  owner: string;
+  owner: Types.ObjectId;
   latitude: number;
   longitude: number;
 }
@@ -15,9 +13,8 @@ const schema = new Schema<Apiary>({
   },
 
   owner: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'user',
-    required: true,
   },
 
   latitude: { 
