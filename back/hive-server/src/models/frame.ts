@@ -1,10 +1,8 @@
-import mongoose from 'mongoose';
-
-const { Schema, model } = mongoose;
+import { Schema, Types, model } from 'mongoose';
 
 interface Frame {
   title: string;
-  hive: string;
+  hive: Types.ObjectId;
   length: number;
   height: number;
 }
@@ -15,7 +13,7 @@ const schema = new Schema<Frame>({
   },
 
   hive: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'hive',
     required: true,
   },
