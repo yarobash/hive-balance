@@ -1,23 +1,21 @@
-import mongoose from 'mongoose';
-
-const { Schema, model } = mongoose;
+import { Schema, Types, model } from 'mongoose';
 
 interface Weight {
-  hive: string;
-  dateTime: string;
+  hive: Types.ObjectId;
+  dateTime: Date;
   weight: number;
 }
 
 const schema = new Schema<Weight>({
   hive: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'hive',
     required: true,
   },
 
   dateTime: {
     type: Date,
-    default: Date.now(),
+    required: true,
   },
 
   weight: {
