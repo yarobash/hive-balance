@@ -7,7 +7,7 @@ interface Apiary {
   longitude: number;
 }
 
-const schema = new Schema<Apiary>({
+const apiarySchema = new Schema<Apiary>({
   title: {
     type: String,
   },
@@ -25,3 +25,5 @@ const schema = new Schema<Apiary>({
     type: Number,
   },
 });
+
+export default model('apiary', apiarySchema);
