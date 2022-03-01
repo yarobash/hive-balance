@@ -23,3 +23,5 @@ const userSchema = new Schema<User>({
     select: false,
   },
 });
+
+export default model('user', userSchema);
