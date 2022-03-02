@@ -20,12 +20,12 @@ const userSchema = new Schema<IUser, UserModel>({
 
   email: {
     type: String,
-    required: true,
+    required: [true, 'Не указан адрес электронной почты'],
   },
 
   password: {
     type: String,
-    required: true,
+    required: [true, 'Не указан пароль'],
     select: false,
   },
 });
