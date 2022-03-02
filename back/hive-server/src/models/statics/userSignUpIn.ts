@@ -1,20 +1,14 @@
 import bcrypt from 'bcrypt';
 
-interface UserData {
-  name: string;
-  email: string;
-  password: string;
-}
-
 export default {
-  createUser(name, email, rawPassword) {
+  createUser(name: string, email: string, rawPassword: string) {
     return bcrypt.hash(rawPassword, 10)
       .then((password) => this.create({
         name, email, password,
       })
-        .then((user) => user)
-        .catch((err) => {
-          return Promise.reject(new Error('bad user'));
+        .then((user: any) => user)
+        .catch((err: any) => {
+          return Promise.reject(err);
         }));
   },
 };
