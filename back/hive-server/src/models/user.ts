@@ -1,18 +1,17 @@
 import { Schema, Model, model } from 'mongoose';
 import userSignUpIn from './statics/userSignUpIn';
 
-interface IUser {
+interface User {
   name: string;
   email: string;
   password: string;
-  createIUser: any;
 }
 
-interface UserModel extends Model<IUser> {
+interface UserModel extends Model<User> {
   createUser(name: string, email: string, password: string): any;
 }
 
-const userSchema = new Schema<IUser, UserModel>({
+const userSchema = new Schema<User, UserModel>({
   name: {
     type: String,
     required: true,
@@ -32,4 +31,4 @@ const userSchema = new Schema<IUser, UserModel>({
 
 userSchema.static('createUser', userSignUpIn.createUser);
 
-export default model<IUser, UserModel>('user', userSchema);
+export default model<User, UserModel>('user', userSchema);
