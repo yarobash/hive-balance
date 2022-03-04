@@ -9,6 +9,7 @@ interface User {
 
 interface UserModel extends Model<User> {
   createUser(name: string, email: string, password: string): any;
+  findUserByCreds(name: string, password: string): any;
 }
 
 const userSchema = new Schema<User, UserModel>({
@@ -20,16 +21,17 @@ const userSchema = new Schema<User, UserModel>({
   email: {
     type: String,
     unique: true,
-    required: [true, 'Не указан адрес электронной почты'],
+    required: [true, 'Email address is not specified'],
   },
 
   password: {
     type: String,
-    required: [true, 'Не указан пароль'],
+    required: [true, 'Password is not specified'],
     select: false,
   },
 });
 
 userSchema.static('createUser', userSignUpIn.createUser);
+userSchema.static('findUserByCreds', userSignUpIn.findUserByCreds);
 
 export default model<User, UserModel>('user', userSchema);
