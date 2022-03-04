@@ -1,4 +1,4 @@
-export class CustomError400 extends Error {
+export class Error400 extends Error {
   statusCode: number;
 
   constructor(message: string) {
@@ -7,11 +7,20 @@ export class CustomError400 extends Error {
   }
 }
 
-export class CustomError401 extends Error {
+export class Error401 extends Error {
   statusCode: number;
 
   constructor(message: string) {
     super(message);
     this.statusCode = 401;
+  }
+}
+
+export class Error409 extends Error {
+  statusCode: number;
+
+  constructor(message: string) {
+    super(message);
+    this.statusCode = 409;
   }
 }
