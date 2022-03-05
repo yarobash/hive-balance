@@ -3,8 +3,8 @@ import { Schema, Types, model } from 'mongoose';
 interface Apiary {
   title: string;
   owner: Types.ObjectId;
-  latitude: number;
-  longitude: number;
+  latitude?: number;
+  longitude?: number;
 }
 
 const apiarySchema = new Schema<Apiary>({
