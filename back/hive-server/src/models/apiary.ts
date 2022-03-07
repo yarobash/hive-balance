@@ -1,10 +1,14 @@
-import { Schema, Types, model } from 'mongoose';
+import { Schema, Types, Model, model } from 'mongoose';
 
 interface Apiary {
   title: string;
   owner: Types.ObjectId;
   latdec?: number;
   londec?: number;
+}
+
+interface ApiaryModel extends Model<Apiary> {
+  createApiary(title: string, owner: Schema.Types.ObjectId, latdec?: number, londec?: number): any;
 }
 
 const apiarySchema = new Schema<Apiary>({
@@ -25,5 +29,7 @@ const apiarySchema = new Schema<Apiary>({
     type: Number,
   },
 });
+
+
 
 export default model('apiary', apiarySchema);
