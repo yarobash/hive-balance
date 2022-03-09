@@ -1,4 +1,5 @@
 import { Schema, Types, Model, model } from 'mongoose';
+import apiary from './statics/apiary';
 
 interface Apiary {
   title: string;
@@ -7,10 +8,8 @@ interface Apiary {
 }
 
 interface ApiaryModel extends Model<Apiary> {
-  createApiary(title: string, owner: Schema.Types.ObjectId, latdec?: number, londec?: number): any;
+  createApiary(title: string, owner: Schema.Types.ObjectId, coordinates?: []): any;
 }
-
-const coordinatesSchema = new Schema({ angle: Number });
 
 const apiarySchema = new Schema<Apiary>({
   title: {
@@ -22,10 +21,16 @@ const apiarySchema = new Schema<Apiary>({
     ref: 'user',
   },
 
-  coordinates: [coordinatesSchema],
-   
+  coordinates: {
+    type: [Number],
+    validate: {
+      validator: function(arr: []) {
+        return arr.length === 0 || arr.length === 2;
+      },
+      message: props => `${props} is not a valid coordinates`
+    },
+  },
 });
 
-
-
-export default model('apiary', apiarySchema);
+apiarySchema.static('createApiary', apiary.createApiary); 
+export default model<Apiary, ApiaryModel>('apiary', apiarySchema);
