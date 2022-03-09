@@ -1,5 +1,5 @@
 import { Schema, Model, model } from 'mongoose';
-import userSignUpIn from './statics/userSignUpIn';
+import user from './statics/user';
 
 interface User {
   name: string;
@@ -31,7 +31,7 @@ const userSchema = new Schema<User, UserModel>({
   },
 });
 
-userSchema.static('createUser', userSignUpIn.createUser);
-userSchema.static('findUserByCreds', userSignUpIn.findUserByCreds);
+userSchema.static('createUser', user.createUser);
+userSchema.static('findUserByCreds', user.findUserByCreds);
 
 export default model<User, UserModel>('user', userSchema);
