@@ -17,9 +17,16 @@ export default {
   },
 
   getMyApiaries(userId: string) {
-    return this.find({owner: userId})
+    return this.find({ owner: userId })
       .orFail(new customErrors.Error404(`User:${userId} doesn't exist`))
       .then((apiaries: any) => apiaries)
+      .catch((err: any) => Promise.reject(err));
+  },
+
+  getApiary(apiaryId: string) {
+    return this.findOne({ _id: apiaryId })
+      .orFail(new customErrors.Error404(`Apiary:${apiaryId} doesn't exist`))
+      .then((apiary: any) => apiary)
       .catch((err: any) => Promise.reject(err));
   },
 };

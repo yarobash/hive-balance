@@ -5,5 +5,6 @@ const router = express.Router();
 
 router.post('/', apiaries.createApiary);
 router.get('/', apiaries.getMyApiaries);
+router.get('/:apiaryId', apiaries.getApiary);
 
 export default router;
