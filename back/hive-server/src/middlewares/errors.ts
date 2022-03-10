@@ -1,4 +1,5 @@
 export default (err: any, req: any, res: any, next: any) => {
+  console.log(err);
   const statusCode: any = err.statusCode || 500;
   const message: string = statusCode === 500
     ? 'Внутренняя ошибка сервера'

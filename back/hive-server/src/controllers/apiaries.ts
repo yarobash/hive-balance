@@ -24,9 +24,23 @@ export default {
     apiary.getApiary(apiaryId)
       .then((apiary: any) => {
         if (apiary.owner.toString() !== req.user._id) {
-          next(new customErrors.Error401('Attempt to get another\'s owner card'));
+          next(new customErrors.Error401('Attempt to get another\'s owner apiary'));
         } else {
           res.send(apiaryAnswer(apiary));
+        }
+      })
+      .catch(next);
+  },
+
+  deleteApiary(req: any, res: any, next: any) {
+    const apiaryId = req.params.apiaryId;
+    apiary.getApiary(apiaryId)
+      .then((apiaryToDel: any) => {
+        if (apiaryToDel.owner.toString() === req.user._id) {
+          apiary.deleteApiary(apiaryToDel._id)
+            .then((deletedApiary: any) => res.send(apiaryAnswer(deletedApiary)));
+        } else {
+          next (new customErrors.Error401('Attempt to delete another\'s owner apiary'));
         }
       })
       .catch(next);
