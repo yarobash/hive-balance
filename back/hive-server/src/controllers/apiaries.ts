@@ -45,4 +45,20 @@ export default {
       })
       .catch(next);
   },
+  
+  editApiaryTitle(req: any, res: any, next: any) {
+    const apiaryId = req.params.apiaryId;
+    apiary.getApiary(apiaryId)
+      .then((apiaryToEdit: any) => {
+        if (apiaryToEdit.owner.toString() === req.user._id) {
+          apiary.editApiaryTitle(apiaryId, req.body.title)
+            .then((editedApiary: any) => res.send(apiaryAnswer(editedApiary)));
+        } else {
+          next (new customErrors.Error401('Attempt to edit another\'s owner apiary'));
+        }
+      })
+      .catch(next);
+  },
+          
+
 }

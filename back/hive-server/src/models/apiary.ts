@@ -12,6 +12,7 @@ interface ApiaryModel extends Model<Apiary> {
   getMyApiaries(userId: string) : any;
   getApiary(apiaryId: string): any;
   deleteApiary(apiaryId: string): any;
+  editApiaryTitle(apiaryId: string, title: string): any;
 }
 
 const apiarySchema = new Schema<Apiary>({
@@ -49,5 +50,6 @@ apiarySchema.static('createApiary', apiary.createApiary);
 apiarySchema.static('getMyApiaries', apiary.getMyApiaries);
 apiarySchema.static('getApiary', apiary.getApiary);
 apiarySchema.static('deleteApiary', apiary.deleteApiary);
+apiarySchema.static('editApiaryTitle', apiary.editApiaryTitle);
 
 export default model<Apiary, ApiaryModel>('apiary', apiarySchema);

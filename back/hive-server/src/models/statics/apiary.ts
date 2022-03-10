@@ -36,4 +36,15 @@ export default {
       .then((apiary: any) => apiary)
       .catch((err: any) => Promise.reject(err));
   },
+
+  editApiaryTitle(apiaryId: string, title: string) {
+    return this.findByIdAndUpdate(
+      apiaryId,
+      { $set: { title: title } },
+      { new: true},
+    )
+    .orFail(new customErrors.Error404(`Apiary: ${apiaryId} doesn't exist`))
+    .then((apiary: any) => apiary)
+    .catch((err: any) => Promise.reject(err));
+  },
 };
