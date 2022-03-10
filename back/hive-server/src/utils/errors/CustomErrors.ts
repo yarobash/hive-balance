@@ -16,6 +16,15 @@ export class Error401 extends Error {
   }
 }
 
+export class Error404 extends Error {
+  statusCode: number;
+
+  constructor(message: string) {
+    super(message);
+    this.statusCode = 404;
+  }
+}
+
 export class Error409 extends Error {
   statusCode: number;
 
