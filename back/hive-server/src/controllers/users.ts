@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import user from './../models/user';
-import { userAnswer } from '../utils/answers';
+import { userAnswer } from '../utils/answers/userAnswers';
 
 export default {
   createUser(req: any, res: any, next: any) {

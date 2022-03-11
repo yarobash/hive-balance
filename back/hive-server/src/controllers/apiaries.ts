@@ -1,5 +1,5 @@
 import apiary from './../models/apiary';
-import { apiaryAnswer, apiariesAnswer } from './../utils/answers';
+import { apiaryAnswer, apiariesAnswer } from '../utils/answers/apiaryAnswers';
 import * as customErrors from '../utils/errors/CustomErrors';
 
 export default {
