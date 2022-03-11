@@ -13,6 +13,7 @@ interface ApiaryModel extends Model<Apiary> {
   getApiary(apiaryId: string): any;
   deleteApiary(apiaryId: string): any;
   editApiaryTitle(apiaryId: string, title: string): any;
+  editApiaryCoordinates(apiaryId: string, newCoordinates: [number]): any;
 }
 
 const apiarySchema = new Schema<Apiary>({
@@ -51,5 +52,6 @@ apiarySchema.static('getMyApiaries', apiary.getMyApiaries);
 apiarySchema.static('getApiary', apiary.getApiary);
 apiarySchema.static('deleteApiary', apiary.deleteApiary);
 apiarySchema.static('editApiaryTitle', apiary.editApiaryTitle);
+apiarySchema.static('editApiaryCoordinates', apiary.editApiaryCoordinates);
 
 export default model<Apiary, ApiaryModel>('apiary', apiarySchema);

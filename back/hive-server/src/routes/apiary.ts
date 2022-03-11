@@ -8,5 +8,6 @@ router.get('/', apiaries.getMyApiaries);
 router.get('/:apiaryId', apiaries.getApiary);
 router.delete('/:apiaryId', apiaries.deleteApiary);
 router.patch('/:apiaryId/title', apiaries.editApiaryTitle);
+router.patch('/:apiaryId/coordinates', apiaries.editApiaryCoordinates);
 
 export default router;

@@ -41,10 +41,21 @@ export default {
     return this.findByIdAndUpdate(
       apiaryId,
       { $set: { title: title } },
-      { new: true},
+      { new: true },
     )
-    .orFail(new customErrors.Error404(`Apiary: ${apiaryId} doesn't exist`))
-    .then((apiary: any) => apiary)
-    .catch((err: any) => Promise.reject(err));
+      .orFail(new customErrors.Error404(`Apiary: ${apiaryId} doesn't exist`))
+      .then((apiary: any) => apiary)
+      .catch((err: any) => Promise.reject(err));
+  },
+
+  editApiaryCoordinates(apiaryId: string, newCoordinates: [number]) {
+     return this.findByIdAndUpdate(
+       apiaryId,
+       { $set: { coordinates: newCoordinates } },
+       { new: true, runValidators: true },
+     )
+       .orFail( new customErrors.Error404(`Apiary: ${apiaryId} doesn't exist`))
+       .then((apiary: any) => apiary)
+       .catch((err: any) => Promise.reject(new customErrors.Error401(fullErrMsg(err))));
   },
 };

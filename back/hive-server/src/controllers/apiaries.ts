@@ -59,6 +59,19 @@ export default {
       })
       .catch(next);
   },
-          
 
+  editApiaryCoordinates(req: any, res: any, next: any) {
+    const apiaryId = req.params.apiaryId;
+    apiary.getApiary(apiaryId)
+      .then((apiaryToEdit: any) => {
+        if (apiaryToEdit.owner.toString() === req.user._id) {
+          apiary.editApiaryCoordinates(apiaryId, req.body.coordinates)
+            .then((editedApiary: any) => res.send(apiaryAnswer(editedApiary)))
+            .catch((err: any) => next(err));
+        } else {
+          next (new customErrors.Error401('Attempt to edit another\'s owner apiary'));
+        }
+      })
+      .catch(next);
+  },
 }
