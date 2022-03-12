@@ -12,6 +12,8 @@ interface Frame {
 interface FrameModel extends Model<Frame> {
   createFrame(title: string, type: string, width: number, height: number, owner?: string): any;
   getAllFrames(owner: string): any;
+  getMyFrames(owner: string): any;
+  getStandardFrames(): any;
 }
 
 const frameSchema = new Schema<Frame>({
@@ -53,5 +55,7 @@ const frameSchema = new Schema<Frame>({
 
 frameSchema.static('createFrame', frame.createFrame);
 frameSchema.static('getAllFrames', frame.getAllFrames);
+frameSchema.static('getMyFrames', frame.getMyFrames);
+frameSchema.static('getStandardFrames', frame.getStandardFrames);
 
 export default model<Frame, FrameModel>('frame', frameSchema);

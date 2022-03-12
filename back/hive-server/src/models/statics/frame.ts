@@ -14,4 +14,16 @@ export default {
       .then((frames: any) => frames)
       .catch((err: any) => Promise.reject(new customErrors.Error401(fullErrMsg(err))));
   },
+
+  getMyFrames(owner: string): any {
+    return this.find({owner: owner})
+      .then((frames: any) => frames)
+      .catch((err: any) => Promise.reject(new customErrors.Error401(fullErrMsg(err))));
+  },
+
+  getStandardFrames(): any {
+    return this.find({type: 'standard'})
+      .then((frames: any) => frames)
+      .catch((err: any) => Promise.reject(new customErrors.Error401(fullErrMsg(err))));
+  },
 }

@@ -19,4 +19,18 @@ export default {
       .then((frames: any) => res.send(framesAnswer(frames)))
       .catch(next);
   },
+
+  getMyFrames(req: any, res: any, next: any) {
+    const owner = req.user._id;
+
+    frame.getMyFrames(owner)
+      .then((frames: any) => res.send(framesAnswer(frames)))
+      .catch(next);
+  },
+
+  getStandardFrames(req: any, res: any, next: any) {
+    frame.getStandardFrames()
+      .then((frames: any) => res.send(framesAnswer(frames)))
+      .catch(next);
+  },
 };
