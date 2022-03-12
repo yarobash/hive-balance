@@ -78,4 +78,24 @@ export default {
       })
       .catch(next);
   },
+
+  editFrameSize(req: any, res: any, next: any) {
+    const id = req.params.frameId;
+    const newWidth = req.body.width;
+    const newHeight = req.body.height;
+
+    frame.getFrame(id)
+      .then((frameToEdit: any) => {
+        if(frameToEdit.type === 'standard') {
+          next (new customErrors.Error401('Standrd frames can\'t be edited'));
+        }
+        if (frameToEdit.owner.toString() === req.user._id) {
+          frame.editFrameSize(id, newWidth, newHeight)
+            .then((editedFrame: any) => res.send(frameAnswer(editedFrame)));
+        } else {
+          next (new customErrors.Error401('Attempt to edit another\'s owner frame'));
+        }
+      })
+      .catch(next);
+  },
 };
