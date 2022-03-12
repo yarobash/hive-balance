@@ -11,7 +11,6 @@ const PORT = 3000;
 const app = express();
 
 //mongoose connect
-mongoose.connect('mongodb://backApp:Q0c77%25%233CNdn@cloudapiary.ru:27017/hive?authSource=hive');
 
 app.use(express.json());
 app.use('/signup', createUser);
