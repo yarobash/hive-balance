@@ -14,6 +14,10 @@ interface FrameModel extends Model<Frame> {
   getAllFrames(owner: string): any;
   getMyFrames(owner: string): any;
   getStandardFrames(): any;
+  getFrame(id: string): any;
+  deleteFrame(id: string): any;
+  editFrameTitle(id: string, newTitle: string): any;
+  editFrameSize(id: string, newWidth: number, newHeight: number): any;
 }
 
 const frameSchema = new Schema<Frame>({
@@ -57,5 +61,9 @@ frameSchema.static('createFrame', frame.createFrame);
 frameSchema.static('getAllFrames', frame.getAllFrames);
 frameSchema.static('getMyFrames', frame.getMyFrames);
 frameSchema.static('getStandardFrames', frame.getStandardFrames);
+frameSchema.static('getFrame', frame.getFrame);
+frameSchema.static('deleteFrame', frame.deleteFrame);
+frameSchema.static('editFrameTitle', frame.editFrameTitle);
+frameSchema.static('editFrameSize', frame.editFrameSize);
 
 export default model<Frame, FrameModel>('frame', frameSchema);

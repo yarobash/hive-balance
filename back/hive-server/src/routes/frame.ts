@@ -7,5 +7,8 @@ router.post('/', frames.createFrame);
 router.get('/', frames.getAllFrames);
 router.get('/my', frames.getMyFrames);
 router.get('/standard', frames.getStandardFrames);
+router.get('/:frameId', frames.getFrame);
+router.delete('/:frameId', frames.deleteFrame);
+router.patch('/:frameId/title', frames.editFrameTitle);
 
 export default router;
