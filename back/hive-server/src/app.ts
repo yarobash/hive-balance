@@ -7,10 +7,12 @@ import frame from './routes/frame';
 import hive from './routes/hive';
 import errorHandler from './middlewares/errors';
 import auth from './middlewares/auth';
-const PORT = 3000;
+
+console.log(process.env);
+
 const app = express();
 
-//mongoose connect
+mongoose.connect(process.env.HIVE_DB_URI);
 
 app.use(express.json());
 app.use('/signup', createUser);
@@ -20,4 +22,4 @@ app.use('/apiary', apiary);
 app.use('/frame', frame);
 app.use('/hive', hive);
 app.use(errorHandler);
-app.listen(PORT);
+app.listen(process.env.PORT);

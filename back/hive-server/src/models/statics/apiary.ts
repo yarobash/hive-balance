@@ -12,7 +12,7 @@ export default {
 
   getMyApiaries(userId: string) {
     return this.find({ owner: userId })
-      .orFail(new customErrors.Error404(`User: ${userId} doesn't exist`))
+      .orFail(new customErrors.Error404(`User: ${userId} doesn't have any apiary`))
       .then((apiaries: any) => apiaries)
       .catch((err: any) => Promise.reject(err));
   },

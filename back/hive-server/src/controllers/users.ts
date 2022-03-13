@@ -20,8 +20,7 @@ export default {
 
     user.findUserByCreds(email, password)
       .then((credits: any) => {
-        const token: string = jwt.sign({ _id: credits._id }, 'big-secret-and-very-big-secret', { expiresIn: '7d' });
-        res.cookie('token', token, { maxAge: 1000 * 3600 * 24 * 7, httpOnly: true });
+        const token: string = jwt.sign({ _id: credits._id }, process.env.SECRET_KEY, { expiresIn: '7d' }); res.cookie('token', token, { maxAge: 1000 * 3600 * 24 * 7, httpOnly: true });
         res.send({ token });
       })
       .catch(next);
