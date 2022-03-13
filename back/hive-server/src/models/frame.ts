@@ -10,12 +10,12 @@ interface Frame {
 }
 
 interface FrameModel extends Model<Frame> {
-  createFrame(title: string, type: string, width: number, height: number, owner?: string): any;
-  getAllFrames(owner: string): any;
-  getMyFrames(owner: string): any;
+  createFrame(title: string, type: string, width: number, height: number, owner?: Types.ObjectId): any;
+  getAllFrames(owner: Types.ObjectId): any;
+  getMyFrames(owner: Types.ObjectId): any;
   getStandardFrames(): any;
-  getFrame(id: string): any;
-  deleteFrame(id: string): any;
+  getFrame(id: Types.ObjectId): any;
+  deleteFrame(id: Types.ObjectId): any;
   editFrameTitle(id: string, newTitle: string): any;
   editFrameSize(id: string, newWidth: number, newHeight: number): any;
 }

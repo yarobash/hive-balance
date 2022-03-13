@@ -8,12 +8,12 @@ interface Apiary {
 }
 
 interface ApiaryModel extends Model<Apiary> {
-  createApiary(title: string, owner: Schema.Types.ObjectId, coordinates?: []): any;
-  getMyApiaries(userId: string) : any;
-  getApiary(apiaryId: string): any;
-  deleteApiary(apiaryId: string): any;
-  editApiaryTitle(apiaryId: string, title: string): any;
-  editApiaryCoordinates(apiaryId: string, newCoordinates: [number]): any;
+  createApiary(title: string, owner: Types.ObjectId, coordinates?: []): any;
+  getMyApiaries(userId: Types.ObjectId) : any;
+  getApiary(apiaryId: Types.ObjectId): any;
+  deleteApiary(apiaryId: Types.ObjectId): any;
+  editApiaryTitle(apiaryId: Types.ObjectId, title: string): any;
+  editApiaryCoordinates(apiaryId: Types.ObjectId, newCoordinates: [number]): any;
 }
 
 const apiarySchema = new Schema<Apiary>({
