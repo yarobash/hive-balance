@@ -1,3 +1,4 @@
 **/node_modules
 /back/hive-server/dist
 tempdata.future.knowledge
+**/.env
