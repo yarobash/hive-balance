@@ -33,4 +33,15 @@ export default {
     .then((hive: any) => hive)
     .catch((err: any) => Promise.reject(err));
   },
+
+  updateHiveFrames(hiveId: Types.ObjectId, newFrames: [Types.ObjectId]) {
+    return this.findByIdAndUpdate(
+      hiveId,
+      {frames: newFrames},
+      {new: true},
+    )
+    .orFail(new customErrors.Error404(`Hive with id: ${hiveId} not found`))
+    .then((hive: any) => hive)
+    .catch((err: any) => Promise.reject(err));
+  },
 }

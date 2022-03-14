@@ -50,4 +50,21 @@ export default {
         }})
       .catch(next);
   },
+
+  updateHiveFrames(req: any, res: any, next: any) {
+    const userId = req.user._id;
+    const hiveId = req.params.hiveId;
+    const newFrames = req.body.frames;
+
+    hive.getHiveById(hiveId)
+      .then((foundHive: any) => {
+        if (foundHive.owner.toString() === userId) {
+          hive.updateHiveFrames(hiveId, newFrames)
+            .then((updatedHive: any) => res.send(hiveAnswer(updatedHive)))
+            .catch(next);
+        } else {
+          next(new customErrors.Error401('Attempt to edit another\'s owner hive'));
+        }})
+      .catch(next);
+  },
 };
