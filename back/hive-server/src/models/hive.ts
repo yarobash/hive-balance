@@ -12,6 +12,7 @@ interface HiveModel extends Model<Hive> {
   createHive(title: string, apiary: Types.ObjectId, owner: Types.ObjectId, frames: [Types.ObjectId]): any;
   getHiveById(id: Types.ObjectId): any;
   getHivesByApiaryId(apiaryId: Types.ObjectId, ownerId: Types.ObjectId): any;
+  updateHiveTitle(hiveId: Types.ObjectId, newTitle: string): any;
 }
 
 const hiveSchema = new Schema<Hive>({
@@ -37,5 +38,6 @@ const hiveSchema = new Schema<Hive>({
 hiveSchema.static('createHive', hive.createHive);
 hiveSchema.static('getHiveById', hive.getHiveById);
 hiveSchema.static('getHivesByApiaryId', hive.getHivesByApiaryId);
+hiveSchema.static('updateHiveTitle', hive.updateHiveTitle);
 
 export default model<Hive, HiveModel>('hive', hiveSchema);

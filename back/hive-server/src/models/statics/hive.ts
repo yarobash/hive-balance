@@ -22,4 +22,15 @@ export default {
       .then((hives: any) => hives)
       .catch((err: any) => Promise.reject(err));
   },
+
+  updateHiveTitle(hiveId: Types.ObjectId, newTitle: string) {
+    return this.findByIdAndUpdate(
+      hiveId,
+      {title: newTitle},
+      {new: true},
+    )
+    .orFail(new customErrors.Error404(`Hive with id: ${hiveId} not found`))
+    .then((hive: any) => hive)
+    .catch((err: any) => Promise.reject(err));
+  },
 }

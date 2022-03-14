@@ -32,5 +32,22 @@ export default {
     hive.getHivesByApiaryId(apiaryId, userId)
       .then((hives: any) => res.send(hivesAnswer(hives)))
       .catch(next);
-  }
+  },
+
+  updateHiveTitle(req: any, res: any, next: any) {
+    const userId = req.user._id;
+    const hiveId = req.params.hiveId;
+    const newTitle = req.body.title;
+
+    hive.getHiveById(hiveId)
+      .then((foundHive: any) => {
+        if (foundHive.owner.toString() === userId) {
+          hive.updateHiveTitle(hiveId, newTitle)
+            .then((updatedHive: any) => res.send(hiveAnswer(updatedHive)))
+            .catch(next);
+        } else {
+          next(new customErrors.Error401('Attempt to edit another\'s owner hive'));
+        }})
+      .catch(next);
+  },
 };
