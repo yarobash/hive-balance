@@ -24,4 +24,13 @@ export default {
       })
       .catch(next);
   },
+
+  getHivesByApiaryId(req: any, res: any, next: any) {
+    const userId = req.user._id;
+    const apiaryId = req.params.apiaryId;
+
+    hive.getHivesByApiaryId(apiaryId, userId)
+      .then((hives: any) => res.send(hivesAnswer(hives)))
+      .catch(next);
+  }
 };

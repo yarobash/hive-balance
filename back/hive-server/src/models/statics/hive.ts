@@ -15,4 +15,11 @@ export default {
       .then((hive: any) => hive)
       .catch((err: any) => Promise.reject(err));
   },
+
+  getHivesByApiaryId(apiaryId: Types.ObjectId, ownerId: Types.ObjectId) {
+    return this.find({apiary: apiaryId, owner: ownerId})
+      .orFail(new customErrors.Error404(`Apiary with id: ${apiaryId} or owner with id: ${ownerId} not found`))
+      .then((hives: any) => hives)
+      .catch((err: any) => Promise.reject(err));
+  },
 }
