@@ -9,6 +9,7 @@ interface Hive {
 
 interface HiveModel extends Model<Hive> {
   createHive(title: string, apiary: Types.ObjectId, frames: [Types.ObjectId]): any;
+  getHiveById(id: Types.ObjectId): any;
 }
 
 const hiveSchema = new Schema<Hive>({
@@ -26,5 +27,6 @@ const hiveSchema = new Schema<Hive>({
 });
 
 hiveSchema.static('createHive', hive.createHive);
+hiveSchema.static('getHiveById', hive.getHiveById);
 
 export default model<Hive, HiveModel>('hive', hiveSchema);
