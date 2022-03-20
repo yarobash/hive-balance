@@ -1,6 +1,6 @@
 import apiary from './../models/apiary';
 import { apiaryAnswer, apiariesAnswer } from '../utils/answers/apiaryAnswers';
-import * as customErrors from '../utils/errors/CustomErrors';
+import CustomError from '../utils/errors/CustomError';
 
 export default {
   createApiary(req: any, res: any, next: any) {
@@ -24,7 +24,7 @@ export default {
     apiary.getApiary(apiaryId)
       .then((apiary: any) => {
         if (apiary.owner.toString() !== req.user._id) {
-          next(new customErrors.Error401('Attempt to get another\'s owner apiary'));
+          next(new CustomError(401, 'Attempt to get another\'s owner apiary'));
         } else {
           res.send(apiaryAnswer(apiary));
         }
@@ -40,7 +40,7 @@ export default {
           apiary.deleteApiary(apiaryToDel._id)
             .then((deletedApiary: any) => res.send(apiaryAnswer(deletedApiary)));
         } else {
-          next (new customErrors.Error401('Attempt to delete another\'s owner apiary'));
+          next (new CustomError(401, 'Attempt to delete another\'s owner apiary'));
         }
       })
       .catch(next);
@@ -54,7 +54,7 @@ export default {
           apiary.editApiaryTitle(apiaryId, req.body.title)
             .then((editedApiary: any) => res.send(apiaryAnswer(editedApiary)));
         } else {
-          next (new customErrors.Error401('Attempt to edit another\'s owner apiary'));
+          next (new CustomError(401, 'Attempt to edit another\'s owner apiary'));
         }
       })
       .catch(next);
@@ -69,7 +69,7 @@ export default {
             .then((editedApiary: any) => res.send(apiaryAnswer(editedApiary)))
             .catch((err: any) => next(err));
         } else {
-          next (new customErrors.Error401('Attempt to edit another\'s owner apiary'));
+          next (new CustomError(401, 'Attempt to edit another\'s owner apiary'));
         }
       })
       .catch(next);

@@ -1,5 +1,5 @@
 import hive from '../models/hive';
-import * as customErrors from '../utils/errors/CustomErrors';
+import CustomError from '../utils/errors/CustomError';
 import { hiveAnswer, hivesAnswer } from '../utils/answers/hiveAnswers';
 
 export default {
@@ -20,7 +20,7 @@ export default {
       .then((hive: any) => {
         userId === hive.owner.toString()
           ? res.send(hiveAnswer(hive))
-          : next(new customErrors.Error401('Attempt to get another\'s owner hive'))
+          : next(new CustomError(401, 'Attempt to get another\'s owner hive'))
       })
       .catch(next);
   },
@@ -46,7 +46,7 @@ export default {
             .then((updatedHive: any) => res.send(hiveAnswer(updatedHive)))
             .catch(next);
         } else {
-          next(new customErrors.Error401('Attempt to edit another\'s owner hive'));
+          next(new CustomError(401, 'Attempt to edit another\'s owner hive'));
         }})
       .catch(next);
   },
@@ -63,7 +63,7 @@ export default {
             .then((updatedHive: any) => res.send(hiveAnswer(updatedHive)))
             .catch(next);
         } else {
-          next(new customErrors.Error401('Attempt to edit another\'s owner hive'));
+          next(new CustomError(401, 'Attempt to edit another\'s owner hive'));
         }})
       .catch(next);
   },

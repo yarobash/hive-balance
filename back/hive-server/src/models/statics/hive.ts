@@ -1,24 +1,24 @@
 import { Types } from 'mongoose';
-import * as customErrors from '../../utils/errors/CustomErrors';
+import CustomError from '../../utils/errors/CustomError';
 import fullErrMsg from '../../utils/errors/fullErrMsg';
 
 export default {
   createHive(title: string, apiary: Types.ObjectId, owner: Types.ObjectId, frames: [string]) {
     return this.create({ title: title, apiary: apiary, owner: owner, frames: frames })
       .then((hive: any) => hive)
-      .catch((err: any) => Promise.reject(new customErrors.Error400(fullErrMsg(err))));
+      .catch((err: any) => Promise.reject(new CustomError(400, fullErrMsg(err))));
   },
 
   getHiveById(id: Types.ObjectId) {
     return this.findById(id)
-      .orFail(new customErrors.Error404(`Hive with _id: ${id} not found`))
+      .orFail(new CustomError(404, `Hive with _id: ${id} not found`))
       .then((hive: any) => hive)
       .catch((err: any) => Promise.reject(err));
   },
 
   getHivesByApiaryId(apiaryId: Types.ObjectId, ownerId: Types.ObjectId) {
     return this.find({apiary: apiaryId, owner: ownerId})
-      .orFail(new customErrors.Error404(`Apiary with id: ${apiaryId} or owner with id: ${ownerId} not found`))
+      .orFail(new CustomError(404, `Apiary with id: ${apiaryId} or owner with id: ${ownerId} not found`))
       .then((hives: any) => hives)
       .catch((err: any) => Promise.reject(err));
   },
@@ -29,7 +29,7 @@ export default {
       {title: newTitle},
       {new: true},
     )
-    .orFail(new customErrors.Error404(`Hive with id: ${hiveId} not found`))
+    .orFail(new CustomError(404, `Hive with id: ${hiveId} not found`))
     .then((hive: any) => hive)
     .catch((err: any) => Promise.reject(err));
   },
@@ -40,7 +40,7 @@ export default {
       {frames: newFrames},
       {new: true},
     )
-    .orFail(new customErrors.Error404(`Hive with id: ${hiveId} not found`))
+    .orFail(new CustomError(404, `Hive with id: ${hiveId} not found`))
     .then((hive: any) => hive)
     .catch((err: any) => Promise.reject(err));
   },

@@ -1,4 +1,4 @@
-import * as customErrors from '../../utils/errors/CustomErrors';
+import CustomError from '../../utils/errors/CustomError';
 import fullErrMsg from '../../utils/errors/fullErrMsg';
 
 export default {
@@ -6,27 +6,27 @@ export default {
     return this.create({title, owner, coordinates})
       .then((apiary: any) => apiary)
       .catch((err:any) => { 
-        return Promise.reject(new customErrors.Error400(fullErrMsg(err)))
+        return Promise.reject(new CustomError(400, fullErrMsg(err)))
       });
   },
 
   getMyApiaries(userId: string) {
     return this.find({ owner: userId })
-      .orFail(new customErrors.Error404(`User: ${userId} doesn't have any apiary`))
+      .orFail(new CustomError(400, `User: ${userId} doesn't have any apiary`))
       .then((apiaries: any) => apiaries)
       .catch((err: any) => Promise.reject(err));
   },
 
   getApiary(apiaryId: string) {
     return this.findOne({ _id: apiaryId })
-      .orFail(new customErrors.Error404(`Apiary: ${apiaryId} doesn't exist`))
+      .orFail(new CustomError(400, `Apiary: ${apiaryId} doesn't exist`))
       .then((apiary: any) => apiary)
       .catch((err: any) => Promise.reject(err));
   },
 
   deleteApiary(apiaryId: string) {
     return this.findByIdAndRemove(apiaryId)
-      .orFail(new customErrors.Error404('Entity to delete not found'))
+      .orFail(new CustomError(400, 'Entity to delete not found'))
       .then((apiary: any) => apiary)
       .catch((err: any) => Promise.reject(err));
   },
@@ -37,7 +37,7 @@ export default {
       { $set: { title: title } },
       { new: true },
     )
-      .orFail(new customErrors.Error404(`Apiary: ${apiaryId} doesn't exist`))
+      .orFail(new CustomError(400, `Apiary: ${apiaryId} doesn't exist`))
       .then((apiary: any) => apiary)
       .catch((err: any) => Promise.reject(err));
   },
@@ -48,8 +48,8 @@ export default {
        { $set: { coordinates: newCoordinates } },
        { new: true, runValidators: true },
      )
-       .orFail( new customErrors.Error404(`Apiary: ${apiaryId} doesn't exist`))
+       .orFail(new CustomError(400, `Apiary: ${apiaryId} doesn't exist`))
        .then((apiary: any) => apiary)
-       .catch((err: any) => Promise.reject(new customErrors.Error401(fullErrMsg(err))));
+       .catch((err: any) => Promise.reject(new CustomError(401, fullErrMsg(err))));
   },
 };

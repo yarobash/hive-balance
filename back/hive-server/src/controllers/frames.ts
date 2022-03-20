@@ -1,6 +1,6 @@
 import frame from '../models/frame';
 import { frameAnswer, framesAnswer } from '../utils/answers/frameAnswers';
-import * as customErrors from '../utils/errors/CustomErrors';
+import CustomError from '../utils/errors/CustomError';
 
 export default {
   createFrame(req: any, res: any, next: any) {
@@ -48,13 +48,13 @@ export default {
     frame.getFrame(id)
       .then((frameToDel: any) => {
         if (frameToDel.type === 'standard') {
-          next (new customErrors.Error401('Standrd frames can\'t be deleted'));
+          next (new CustomError(401, 'Standrd frames can\'t be deleted'));
         }
         if (frameToDel.owner.toString() === req.user._id) {
           frame.deleteFrame(frameToDel._id)
             .then((deletedFrame: any) => res.send(frameAnswer(deletedFrame)));
         } else {
-          next (new customErrors.Error401('Attempt to delete another\'s owner frame'));
+          next (new CustomError(401, 'Attempt to delete another\'s owner frame'));
         }
       })
       .catch(next);
@@ -67,13 +67,13 @@ export default {
     frame.getFrame(id)
       .then((frameToEdit: any) => {
         if (frameToEdit.type === 'standard') {
-          next (new customErrors.Error401('Standrd frames can\'t be edited'));
+          next (new CustomError(401, 'Standrd frames can\'t be edited'));
         }
         if (frameToEdit.owner.toString() === req.user._id) {
           frame.editFrameTitle(id, newTitle)
             .then((editedFrame: any) => res.send(frameAnswer(editedFrame)));
         } else {
-          next (new customErrors.Error401('Attempt to edit another\'s owner frame'));
+          next (new CustomError(401, 'Attempt to edit another\'s owner frame'));
         }
       })
       .catch(next);
@@ -87,13 +87,13 @@ export default {
     frame.getFrame(id)
       .then((frameToEdit: any) => {
         if(frameToEdit.type === 'standard') {
-          next (new customErrors.Error401('Standrd frames can\'t be edited'));
+          next (new CustomError(401, 'Standrd frames can\'t be edited'));
         }
         if (frameToEdit.owner.toString() === req.user._id) {
           frame.editFrameSize(id, newWidth, newHeight)
             .then((editedFrame: any) => res.send(frameAnswer(editedFrame)));
         } else {
-          next (new customErrors.Error401('Attempt to edit another\'s owner frame'));
+          next (new CustomError(401, 'Attempt to edit another\'s owner frame'));
         }
       })
       .catch(next);
