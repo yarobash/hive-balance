@@ -12,7 +12,6 @@ import auth from './middlewares/auth';
 const app = express();
 
 mongoose.connect(process.env.HIVE_DB_URI);
-console.log('I\'m ready to serve');
 app.use(express.json());
 app.use('/signup', createUser);
 app.use('/signin', login);
