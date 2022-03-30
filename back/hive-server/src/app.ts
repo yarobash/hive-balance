@@ -8,6 +8,7 @@ import hive from './routes/hive';
 import errorHandler from './middlewares/errors';
 import auth from './middlewares/auth';
 
+// [TODO] replace routes in dedicated folder with index file
 
 const app = express();
 
