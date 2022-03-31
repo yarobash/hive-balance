@@ -1,5 +1,6 @@
 import CustomError from '../../utils/errors/CustomError';
 import fullErrMsg from '../../utils/errors/fullErrMsg';
+import errMsgs from '../../shared/constants/errorMessages';
 
 export default {
   createFrame(title: string, type: string, width: number, height: number, owner?: string): any {
@@ -11,35 +12,35 @@ export default {
   // get all standard and all user's frames
   getAllFrames(owner: string): any {
     return this.find({ $or: [ { type: "standard" }, { owner: owner } ] })
-      .orFail(new CustomError(400, `Frames don't exist`))
+      .orFail(new CustomError(400, errMsgs.nonexistentFrams()))
       .then((frames: any) => frames)
       .catch((err: any) => Promise.reject(err));
   },
 
   getMyFrames(owner: string): any {
     return this.find({owner: owner})
-      .ofFail(new CustomError(400, `Frame with owner: ${owner} doesn't exist`))
+      .ofFail(new CustomError(400, errMsgs.ownerlessFrame(owner)))
       .then((frames: any) => frames)
       .catch((err: any) => Promise.reject(err));
   },
 
   getStandardFrames(): any {
     return this.find({type: 'standard'})
-      .orFail(new CustomError(400, 'Frame with type: standard doesn\'t exist'))
+      .orFail(new CustomError(400, errMsgs.nonexistentStandardFrame()))
       .then((frames: any) => frames)
       .catch((err: any) => Promise.reject(err));
   },
 
   getFrame(id: string) {
     return this.findById(id)
-      .orFail(new CustomError(400, `Frame: ${id} doesn't exist`))
+      .orFail(new CustomError(400, errMsgs.nonexistentFrame(id)))
       .then((frame: any) => frame)
       .catch((err: any) => Promise.reject(err));
   },
 
   deleteFrame(id: string) {
     return this.findByIdAndRemove(id)
-      .orFail(new CustomError(400, `Frame: ${id} doesn't exist`))
+      .orFail(new CustomError(400, errMsgs.nonexistentFrame(id)))
       .then((frame: any) => frame)
       .catch((err: any) => Promise.reject(err));
   },
@@ -50,7 +51,7 @@ export default {
       {title: newTitle},
       {new: true, runValidators: true}
     )
-      .orFail(new CustomError(400, `Frame: ${id} doesn't exist`))
+      .orFail(new CustomError(400, errMsgs.nonexistentFrame(id)))
       .then((frame: any) => frame)
       .catch((err: any) => Promise.reject(err));
   },
@@ -61,7 +62,7 @@ export default {
       {width: newWidth, height: newHeight},
       {new: true, runValidators: true},
     )
-      .orFail(new CustomError(400, `Frame: ${id} doesn't exist`))
+      .orFail(new CustomError(400, errMsgs.nonexistentFrame(id)))
       .then((frame: any) => frame)
       .catch((err: any) => Promise.reject(err));
   },
