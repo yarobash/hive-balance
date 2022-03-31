@@ -4,6 +4,7 @@
   "description": "The main server of 'hive-balance' project",
   "main": "dist/index.js",
   "scripts": {
+    "lint": "npx eslint",
     "dev": "nodemon",
     "start": "ts-node -r dotenv/config ./src/app.ts",
     "build": "[ -d dist ] && rm -r dist; tsc -b --verbose",
