@@ -7,4 +7,7 @@ export default {
   ownerlessFrame: (owner: any) => `Frame with owner: ${owner} doesn't exist`,
   nonexistentHive: (id: any) => `Hive: ${id} doesn't exist`,
   nonexistentHives: (apiaryId: any, ownerId: any) => `Apiary with id: ${apiaryId} or owner with id: ${ownerId} not found`,
+  invalidEmailPass: () => 'Email or password is invalid',
+  duplicateEmailError: () => 'Duplicate email error',
+  pathPassIsRequire: () => 'Path `password` is required',
 };
