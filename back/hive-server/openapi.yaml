@@ -41,12 +41,35 @@ paths:
               example:
                 name: 'John Doe'
                 email: 'myname@email.com'
+  /signin:
+    post:
+      summary: User authorization process with token given back in case of correct credits
+      tags:
+        - user
+      requestBody:
+        description: 'User credentials for authentication'
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/AuthorizationCredentials'
+            example:
+              email: 'myname@email.com'
+              password: '123qwerty'
+      responses:
+        200:
+          description: A token sent back in cookies after successfull authentication
+          headers:
+            Set-Cookie:
+              description: Cookie token
+              schema:
+                type: string
 
 
 components:
 
   schemas:
     UserSignUp:
+      description: Required data for user creation
       type: object
       required:
        - name
@@ -60,6 +83,7 @@ components:
         password:
           type: string
     User:
+      description: Data returned after successfull user creation
       type: object
       required:
         - name
@@ -68,4 +92,15 @@ components:
         name:
           type: string
         email:
+          type: string
+    AuthorizationCredentials:
+      description: Required authentication data
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+        password:
           type: string
