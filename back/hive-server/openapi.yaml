@@ -1,0 +1,71 @@
+openapi: "3.0.1"
+info:
+  title: Cloud Apiary
+  description: Backend API for cloud apiary management service
+  contact:
+    name: API support
+    url: https://cloudapiary.ru/contacts
+    email: info@cloudapiary.ru
+  license:
+    name: Apache 2.0
+  version: 0.0.1
+servers:
+  - url: https://api.cloudapiary.ru/v1
+    description: Production server
+  - url: https://dev.cloudapiary.ru/v1
+    description: Development server
+paths:
+  /signup:
+    post:
+      tags:
+      - user
+      summary: Create new user with given credentials
+      requestBody:
+        description: 'New user credentials to add to the system'
+        required: true
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/UserSignUp'
+            example:
+              name: 'John Doe'
+              email: 'myname@email.com'
+              password: '123qwerty'
+      responses:
+        200:
+          description: New user successfully created
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/User'
+              example:
+                name: 'John Doe'
+                email: 'myname@email.com'
+
+
+components:
+
+  schemas:
+    UserSignUp:
+      type: object
+      required:
+       - name
+       - email
+       - password
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+    User:
+      type: object
+      required:
+        - name
+        - email
+      properties:
+        name:
+          type: string
+        email:
+          type: string
