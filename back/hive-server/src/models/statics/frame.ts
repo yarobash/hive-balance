@@ -12,7 +12,7 @@ export default {
   // get all standard and all user's frames
   getAllFrames(owner: string): any {
     return this.find({ $or: [ { type: "standard" }, { owner: owner } ] })
-      .orFail(new CustomError(400, errMsgs.nonexistentFrams()))
+      .orFail(new CustomError(400, errMsgs.nonexistentFrames()))
       .then((frames: any) => frames)
       .catch((err: any) => Promise.reject(err));
   },
