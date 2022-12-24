@@ -19,7 +19,7 @@ export default {
 
   getHivesByApiaryId(apiaryId: Types.ObjectId, ownerId: Types.ObjectId) {
     return this.find({apiary: apiaryId, owner: ownerId})
-      .orFail(new CustomError(404, errMsgs.nonexistentHives(apiaryId, ownerId)))
+      .orFail(new CustomError(404, errMsgs.nonexistentHives(String(apiaryId), String(ownerId))))
       .then((hives: any) => hives)
       .catch((err: any) => Promise.reject(err));
   },
